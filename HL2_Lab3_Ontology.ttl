@@ -1,0 +1,497 @@
+@prefix : <http://example.org/hl2-lab3#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@base <http://example.org/hl2-lab3#> .
+
+<http://example.org/hl2-lab3> rdf:type owl:Ontology ;
+                               rdfs:comment "Модель прохождения квестов персонажами, их перемещения по локациям и потребности в предметах."@ru ;
+                               rdfs:label "ЛР3 — онтологическая модель ситуации во вселенной Half-Life 2"@ru .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/11/swrl#argument1
+swrl:argument1 rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/11/swrl#argument2
+swrl:argument2 rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/11/swrl#body
+swrl:body rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/11/swrl#head
+swrl:head rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2003/11/swrl#propertyPredicate
+swrl:propertyPredicate rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://example.org/hl2-lab3#containsItem
+:containsItem rdf:type owl:ObjectProperty ;
+              rdfs:domain :Location ;
+              rdfs:range :Item ;
+              rdfs:label "содержит предмет"@ru .
+
+
+###  http://example.org/hl2-lab3#endsIn
+:endsIn rdf:type owl:ObjectProperty ;
+        rdfs:domain :Quest ;
+        rdfs:range :Location ;
+        rdfs:label "заканчивается в"@ru .
+
+
+###  http://example.org/hl2-lab3#locatedIn
+:locatedIn rdf:type owl:ObjectProperty ;
+           rdfs:domain :Character ;
+           rdfs:range :Location ;
+           rdfs:label "находится в"@ru .
+
+
+###  http://example.org/hl2-lab3#needsItem
+:needsItem rdf:type owl:ObjectProperty ;
+           rdfs:domain :Character ;
+           rdfs:range :Item ;
+           rdfs:label "нуждается в предмете"@ru .
+
+
+###  http://example.org/hl2-lab3#requiresItem
+:requiresItem rdf:type owl:ObjectProperty ;
+              rdfs:domain :Quest ;
+              rdfs:range :Item ;
+              rdfs:label "требует предмет"@ru .
+
+
+###  http://example.org/hl2-lab3#startsIn
+:startsIn rdf:type owl:ObjectProperty ;
+          rdfs:domain :Quest ;
+          rdfs:range :Location ;
+          rdfs:label "начинается в"@ru .
+
+
+###  http://example.org/hl2-lab3#takesPartIn
+:takesPartIn rdf:type owl:ObjectProperty ;
+             rdfs:domain :Character ;
+             rdfs:range :Quest ;
+             rdfs:label "участвует в квесте"@ru .
+
+
+###  http://example.org/hl2-lab3#usesItem
+:usesItem rdf:type owl:ObjectProperty ;
+          rdfs:domain :Character ;
+          rdfs:range :Item ;
+          rdfs:label "использует предмет"@ru .
+
+
+###  http://example.org/hl2-lab3#visitsLocation
+:visitsLocation rdf:type owl:ObjectProperty ;
+                rdfs:domain :Character ;
+                rdfs:range :Location ;
+                rdfs:label "посещает локацию"@ru .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://example.org/hl2-lab3#characterName
+:characterName rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Character ;
+               rdfs:range xsd:string ;
+               rdfs:label "имя персонажа"@ru .
+
+
+###  http://example.org/hl2-lab3#itemName
+:itemName rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Item ;
+          rdfs:range xsd:string ;
+          rdfs:label "название предмета"@ru .
+
+
+###  http://example.org/hl2-lab3#locationName
+:locationName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Location ;
+              rdfs:range xsd:string ;
+              rdfs:label "название локации"@ru .
+
+
+###  http://example.org/hl2-lab3#questName
+:questName rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Quest ;
+           rdfs:range xsd:string ;
+           rdfs:label "название квеста"@ru .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://example.org/hl2-lab3#Ally
+:Ally rdf:type owl:Class ;
+      rdfs:subClassOf :Character ;
+      rdfs:label "Союзник"@ru .
+
+
+###  http://example.org/hl2-lab3#Building
+:Building rdf:type owl:Class ;
+          rdfs:subClassOf :Location ;
+          rdfs:label "Здание"@ru .
+
+
+###  http://example.org/hl2-lab3#Character
+:Character rdf:type owl:Class ;
+           rdfs:label "Персонаж"@ru .
+
+
+###  http://example.org/hl2-lab3#City
+:City rdf:type owl:Class ;
+      rdfs:subClassOf :Location ;
+      rdfs:label "Город"@ru .
+
+
+###  http://example.org/hl2-lab3#Enemy
+:Enemy rdf:type owl:Class ;
+       rdfs:subClassOf :PlayerCharacter ;
+       rdfs:label "Противник"@ru .
+
+
+###  http://example.org/hl2-lab3#Equipment
+:Equipment rdf:type owl:Class ;
+           rdfs:subClassOf :Item ;
+           rdfs:label "Экипировка"@ru .
+
+
+###  http://example.org/hl2-lab3#Item
+:Item rdf:type owl:Class ;
+      rdfs:label "Предмет"@ru .
+
+
+###  http://example.org/hl2-lab3#Location
+:Location rdf:type owl:Class ;
+          rdfs:label "Локация"@ru .
+
+
+###  http://example.org/hl2-lab3#MainQuest
+:MainQuest rdf:type owl:Class ;
+           rdfs:subClassOf :Quest ;
+           rdfs:label "Основной квест"@ru .
+
+
+###  http://example.org/hl2-lab3#OutdoorLocation
+:OutdoorLocation rdf:type owl:Class ;
+                 rdfs:subClassOf :Location ;
+                 rdfs:label "Открытая локация"@ru .
+
+
+###  http://example.org/hl2-lab3#PlayerCharacter
+:PlayerCharacter rdf:type owl:Class ;
+                 rdfs:subClassOf :Character ;
+                 rdfs:label "Игровой персонаж"@ru .
+
+
+###  http://example.org/hl2-lab3#Quest
+:Quest rdf:type owl:Class ;
+       rdfs:label "Квест"@ru .
+
+
+###  http://example.org/hl2-lab3#QuestItem
+:QuestItem rdf:type owl:Class ;
+           rdfs:subClassOf :Item ;
+           rdfs:label "Квестовый предмет"@ru .
+
+
+###  http://example.org/hl2-lab3#SideQuest
+:SideQuest rdf:type owl:Class ;
+           rdfs:subClassOf :Quest ;
+           rdfs:label "Побочный квест"@ru .
+
+
+###  http://example.org/hl2-lab3#Weapon
+:Weapon rdf:type owl:Class ;
+        rdfs:subClassOf :Item ;
+        rdfs:label "Оружие"@ru .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://example.org/hl2-lab3#AlyxVance
+:AlyxVance rdf:type owl:NamedIndividual ,
+                    :Ally ,
+                    :Character ;
+           :locatedIn :City17 ;
+           :needsItem :HEVSuit ;
+           :takesPartIn :GoToBlackMesaEast ;
+           :usesItem :GravityGun ;
+           :visitsLocation :City17 ;
+           :characterName "Аликс Вэнс" ;
+           rdfs:label "Аликс Вэнс"@ru .
+
+
+###  http://example.org/hl2-lab3#BlackMesaEast
+:BlackMesaEast rdf:type owl:NamedIndividual ,
+                        :Building ,
+                        :Location ;
+               :containsItem :GravityGun ;
+               :locationName "Восточная Чёрная Меза" ;
+               rdfs:label "Восточная Чёрная Меза"@ru .
+
+
+###  http://example.org/hl2-lab3#Canals
+:Canals rdf:type owl:NamedIndividual ,
+                 :Location ,
+                 :OutdoorLocation ;
+        :locationName "Каналы" ;
+        rdfs:label "Каналы"@ru .
+
+
+###  http://example.org/hl2-lab3#Citadel
+:Citadel rdf:type owl:NamedIndividual ,
+                  :Building ,
+                  :Location ;
+         :locationName "Цитадель" ;
+         rdfs:label "Цитадель"@ru .
+
+
+###  http://example.org/hl2-lab3#City17
+:City17 rdf:type owl:NamedIndividual ,
+                 :City ,
+                 :Location ;
+        :containsItem :Crowbar ;
+        :locationName "Сити-17" ;
+        rdfs:label "Сити-17"@ru .
+
+
+###  http://example.org/hl2-lab3#CombineSoldier
+:CombineSoldier rdf:type owl:NamedIndividual ,
+                         :Character ,
+                         :Enemy ;
+                :locatedIn :City17 ;
+                :usesItem :PulseRifle ;
+                :characterName "Солдат Альянса" ;
+                rdfs:label "Солдат Альянса"@ru .
+
+
+###  http://example.org/hl2-lab3#Crowbar
+:Crowbar rdf:type owl:NamedIndividual ,
+                  :Item ,
+                  :Weapon ;
+         :itemName "Монтировка" ;
+         rdfs:label "Монтировка"@ru .
+
+
+###  http://example.org/hl2-lab3#EscapeCity17
+:EscapeCity17 rdf:type owl:NamedIndividual ,
+                       :MainQuest ,
+                       :Quest ;
+              :endsIn :Canals ;
+              :requiresItem :Crowbar ;
+              :startsIn :City17 ;
+              :questName "Побег из Сити-17" ;
+              rdfs:label "Побег из Сити-17"@ru .
+
+
+###  http://example.org/hl2-lab3#GoToBlackMesaEast
+:GoToBlackMesaEast rdf:type owl:NamedIndividual ,
+                            :MainQuest ,
+                            :Quest ;
+                   :endsIn :BlackMesaEast ;
+                   :requiresItem :HEVSuit ;
+                   :startsIn :City17 ;
+                   :questName "Путь в Восточную Чёрную Мезу" ;
+                   rdfs:label "Путь в Восточную Чёрную Мезу"@ru .
+
+
+###  http://example.org/hl2-lab3#GordonFreeman
+:GordonFreeman rdf:type owl:NamedIndividual ,
+                        :Character ,
+                        :PlayerCharacter ;
+               :locatedIn :City17 ;
+               :needsItem :Crowbar ,
+                          :GravityGun ,
+                          :HEVSuit ;
+               :takesPartIn :EscapeCity17 ,
+                            :GoToBlackMesaEast ,
+                            :ThroughRavenholm ;
+               :usesItem :Crowbar ,
+                         :GravityGun ,
+                         :HEVSuit ;
+               :visitsLocation :BlackMesaEast ,
+                               :City17 ;
+               :characterName "Гордон Фримен" ;
+               rdfs:label "Гордон Фримен"@ru .
+
+
+###  http://example.org/hl2-lab3#GravityGun
+:GravityGun rdf:type owl:NamedIndividual ,
+                     :Item ,
+                     :Weapon ;
+            :itemName "Гравипушка" ;
+            rdfs:label "Гравипушка"@ru .
+
+
+###  http://example.org/hl2-lab3#HEVSuit
+:HEVSuit rdf:type owl:NamedIndividual ,
+                  :Equipment ,
+                  :Item ;
+         :itemName "Защитный костюм HEV" ;
+         rdfs:label "Защитный костюм HEV"@ru .
+
+
+###  http://example.org/hl2-lab3#PulseRifle
+:PulseRifle rdf:type owl:NamedIndividual ,
+                     :Item ,
+                     :Weapon ;
+            :itemName "Импульсная винтовка" ;
+            rdfs:label "Импульсная винтовка"@ru .
+
+
+###  http://example.org/hl2-lab3#Ravenholm
+:Ravenholm rdf:type owl:NamedIndividual ,
+                    :City ,
+                    :Location ;
+           :locationName "Рейвенхольм" ;
+           rdfs:label "Рейвенхольм"@ru .
+
+
+###  http://example.org/hl2-lab3#ThroughRavenholm
+:ThroughRavenholm rdf:type owl:NamedIndividual ,
+                           :MainQuest ,
+                           :Quest ;
+                  :endsIn :Ravenholm ;
+                  :requiresItem :GravityGun ;
+                  :startsIn :BlackMesaEast ;
+                  :questName "Путь через Рейвенхольм" ;
+                  rdfs:label "Путь через Рейвенхольм"@ru .
+
+
+[ swrl:argument1 :characterVar ;
+  swrl:argument2 :questVar ;
+  swrl:propertyPredicate :takesPartIn
+] .
+
+[ swrl:argument1 :characterVar ;
+   swrl:argument2 :questVar ;
+   swrl:propertyPredicate :takesPartIn
+ ] .
+
+[ swrl:argument1 :characterVar ;
+   swrl:argument2 :locationVar ;
+   swrl:propertyPredicate :visitsLocation
+ ] .
+
+[ swrl:argument1 :questVar ;
+   swrl:argument2 :locationVar ;
+   swrl:propertyPredicate :startsIn
+ ] .
+
+[ swrl:argument1 :questVar ;
+   swrl:argument2 :itemVar ;
+   swrl:propertyPredicate :requiresItem
+ ] .
+
+[ swrl:argument1 :characterVar ;
+   swrl:argument2 :itemVar ;
+   swrl:propertyPredicate :needsItem
+ ] .
+
+#################################################################
+#    Annotations
+#################################################################
+
+:InferNeededItem swrl:body [ ] ;
+swrl:head [ ] .
+
+
+:InferVisitedLocation swrl:body [ ] ;
+swrl:head [ ] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:character rdf:type swrl:Variable .
+
+:quest rdf:type swrl:Variable .
+
+:item rdf:type swrl:Variable .
+
+:location rdf:type swrl:Variable .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Определение необходимого предмета" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate :takesPartIn ;
+                           swrl:argument1 :character ;
+                           swrl:argument2 :quest
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                      swrl:propertyPredicate :requiresItem ;
+                                      swrl:argument1 :quest ;
+                                      swrl:argument2 :item
+                                    ] ;
+                          rdf:rest rdf:nil
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate :needsItem ;
+                           swrl:argument1 :character ;
+                           swrl:argument2 :item
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "Определение посещаемой локации" ;
+   rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate :takesPartIn ;
+                           swrl:argument1 :character ;
+                           swrl:argument2 :quest
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                                      swrl:propertyPredicate :startsIn ;
+                                      swrl:argument1 :quest ;
+                                      swrl:argument2 :location
+                                    ] ;
+                          rdf:rest rdf:nil
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:IndividualPropertyAtom ;
+                           swrl:propertyPredicate :visitsLocation ;
+                           swrl:argument1 :character ;
+                           swrl:argument2 :location
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
